@@ -22,18 +22,14 @@ namespace Evaluation_Manager.Repositories
             if (dr.HasRows)
             {
                 dr.Read();
-                student = new Student()
-                {
-                    Id = int.Parse(dr["Id"].ToString()),
-                    FirstName = dr["FirstName"].ToString(),
-                    LastName = dr["LastName"].ToString()
-                };
+                student = CreateObject(dr);
             }
 
             DB.CloseConnection();
 
             return student;
         }
+
         public static List<Student> GetStudents()
         {
             List<Student> students = new List<Student>();
@@ -44,17 +40,23 @@ namespace Evaluation_Manager.Repositories
 
             while (dr.Read())
             {
-                students.Add(new Student()
-                {
-                    Id = int.Parse(dr["Id"].ToString()),
-                    FirstName = dr["FirstName"].ToString(),
-                    LastName = dr["LastName"].ToString()
-                });
+                Student student = CreateObject(dr);
+                students.Add(student);
             }
 
             DB.CloseConnection();
 
             return students;
+        }
+
+        private static Student CreateObject(SqlDataReader dr)
+        {
+            return new Student()
+            {
+                Id = int.Parse(dr["Id"].ToString()),
+                FirstName = dr["FirstName"].ToString(),
+                LastName = dr["LastName"].ToString()
+            };
         }
     }
 }
