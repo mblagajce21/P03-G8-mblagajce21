@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Evaluation_Manager.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace Evaluation_Manager
 {
     public partial class FrmEvaluation : Form
     {
-        public FrmEvaluation()
+        public FrmEvaluation(Models.Student student)
         {
             InitializeComponent();
+            Text = student.ToString();
+        }
+
+        private void FrmEvaluation_Load(object sender, EventArgs e)
+        {
+            var activities = ActivityRepository.GetActivities();
+            cboActivities.DataSource = activities;
         }
     }
 }

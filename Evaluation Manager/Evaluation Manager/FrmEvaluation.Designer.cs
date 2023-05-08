@@ -58,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(167, 9);
+            this.label2.Location = new System.Drawing.Point(27, 315);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 16);
             this.label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             // txtMinForSignature
             // 
-            this.txtMinForSignature.Location = new System.Drawing.Point(170, 28);
+            this.txtMinForSignature.Location = new System.Drawing.Point(30, 334);
             this.txtMinForSignature.Name = "txtMinForSignature";
             this.txtMinForSignature.ReadOnly = true;
             this.txtMinForSignature.Size = new System.Drawing.Size(100, 22);
@@ -78,12 +78,12 @@
             this.cboActivities.FormattingEnabled = true;
             this.cboActivities.Location = new System.Drawing.Point(12, 26);
             this.cboActivities.Name = "cboActivities";
-            this.cboActivities.Size = new System.Drawing.Size(121, 24);
+            this.cboActivities.Size = new System.Drawing.Size(350, 24);
             this.cboActivities.TabIndex = 3;
             // 
             // txtMinForGrade
             // 
-            this.txtMinForGrade.Location = new System.Drawing.Point(310, 28);
+            this.txtMinForGrade.Location = new System.Drawing.Point(170, 334);
             this.txtMinForGrade.Name = "txtMinForGrade";
             this.txtMinForGrade.ReadOnly = true;
             this.txtMinForGrade.Size = new System.Drawing.Size(100, 22);
@@ -92,7 +92,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(307, 9);
+            this.label3.Location = new System.Drawing.Point(167, 315);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 16);
             this.label3.TabIndex = 4;
@@ -196,7 +196,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FrmEvaluation";
-            this.Text = "FrmEvaluation";
+            this.Load += new System.EventHandler(this.FrmEvaluation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

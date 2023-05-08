@@ -1,4 +1,5 @@
-﻿using Evaluation_Manager.Repositories;
+﻿using Evaluation_Manager.Models;
+using Evaluation_Manager.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,19 @@ namespace Evaluation_Manager
 
         private void FrmStudents_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = StudentRepository.GetStudents();
+            dgvStudents.DataSource = StudentRepository.GetStudents();
+        }
+
+        private void btnEvaluateStudent_Click(object sender, EventArgs e)
+        {
+            Student student = dgvStudents.CurrentRow.DataBoundItem as Student;
+
+            if (student != null)
+            {
+                var frmEvaluation = new FrmEvaluation(student);
+                frmEvaluation.ShowDialog();
+            }
+
         }
     }
 }
