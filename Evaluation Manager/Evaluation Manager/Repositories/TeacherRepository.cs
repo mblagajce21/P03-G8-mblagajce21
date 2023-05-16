@@ -6,52 +6,45 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace Evaluation_Manager.Repositories
-{
-    public class TeacherRepository
-    {
-        public static Teacher GetTeacher(string username)
-        {
-            return FetchTeacher($"SELECT * FROM Teachers WHERE Username = '{username}'");
-        }
-
-        public static Teacher GetTeacher(int id)
-        {
+namespace Evaluation_Manager.Repositories {
+    public class TeacherRepository {
+        public static Teacher GetTeacher(int id) {
             return FetchTeacher($"SELECT * FROM Teachers WHERE Id = {id}");
         }
 
-        private static Teacher FetchTeacher(string sql)
-        {
+        public static Teacher GetTeacher(string username) {
+            return FetchTeacher($"SELECT * FROM Teachers WHERE Username = '{username}'");
+        }
+
+        private static Teacher FetchTeacher(string sql) {
             Teacher teacher = null;
-
             DB.OpenConnection();
-
-            var dr = DB.GetDataReader(sql);
-
-            if (dr.HasRows)
-            {
-                dr.Read();
-                teacher = CreateObject(dr);
+            var reader = DB.GetDataReader(sql);
+            if (reader.HasRows) {
+                reader.Read();
+                teacher = CreateObject(reader);
+                reader.Close();
             }
-
             DB.CloseConnection();
-
             return teacher;
         }
 
-        private static Teacher CreateObject(SqlDataReader dr)
-        {
-            return new Teacher()
-            {
-                Id = int.Parse(dr["Id"].ToString()),
-                FirstName = dr["FirstName"].ToString(),
-                LastName = dr["LastName"].ToString(),
-                Username = dr["Username"].ToString(),
-                Password = dr["Password"].ToString()
+        private static Teacher CreateObject(SqlDataReader reader) {
+            int id = int.Parse(reader["Id"].ToString());
+            string firstName = reader["FirstName"].ToString();
+            string lastName = reader["LastName"].ToString();
+            string username = reader["Username"].ToString();
+            string password = reader["Password"].ToString();
+
+            var teacher = new Teacher {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                Username = username,
+                Password = password
             };
+            return teacher;
         }
     }
 }

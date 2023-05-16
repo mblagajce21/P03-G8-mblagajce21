@@ -10,33 +10,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Evaluation_Manager
-{
-    public partial class FrmLogin : Form
-    {
+namespace Evaluation_Manager {
+    public partial class FrmLogin : Form {
         public static Teacher LoggedTeacher { get; set; }
 
-        public FrmLogin()
-        {
+        public FrmLogin() {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {            
+        private void btnLogin_Click(object sender, EventArgs e) {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
             LoggedTeacher = TeacherRepository.GetTeacher(username);
 
-            if (LoggedTeacher != null && LoggedTeacher.CheckPassword(password))
-            {
+            if (LoggedTeacher != null && LoggedTeacher.CheckPassword(password)) {
                 FrmStudents frmStudents = new FrmStudents();
                 Hide();
                 frmStudents.ShowDialog();
                 Close();
-            }
-            else
-            {
+            } else {
                 MessageBox.Show("Neispravni podaci");
             }
         }
